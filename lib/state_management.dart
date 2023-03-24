@@ -48,6 +48,28 @@ class HomePageManager {
     _handleResponse(response);
   }
 
+   Future<void> makePutRequest() async {
+    resultNotifier.value = RequestLoadInProgress();
+
+    var response = await http.put(Uri.parse('http://localhost:8080/category/640088dc9d7d6dbe197f9458'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, dynamic>{
+  "name": "ເຄື່ອງໃຊ້ໄຟຟ້າ2",
+  "icon": "electricity2.png",
+  "description": "ທຸກຢ່າງທີ່ກ່ຽວກັບເຄື່ອງໃຊ້ໄຟຟ້າ"
+}));
+
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+    _handleResponse(response);
+  }
+
+
+
   void _handleResponse(var response) {
     if (response.statusCode >= 400) {
       resultNotifier.value = RequestLoadFailure();
