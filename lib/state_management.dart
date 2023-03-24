@@ -26,9 +26,13 @@ class HomePageManager{
   Future<void> makePostRequest() async {
     resultNotifier.value = RequestLoadInProgress();
     final url = Uri.parse('$urlPrefix/Category');
-    final headers = {"Content-type": "localhost:8080"};
+    //final headers = {"Content-type": "localhost:8080/category"};
     final json = '{"title": "Hello", "body": "body text", "userId": 1}';
-    final response = await post(url, headers: headers, body: json);
+    final response = await post(url, headers: {
+      'Content-Type': '',
+      'Accept': '',
+      'Authorization': 'Bearer $token'
+    });
     print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
     _handleResponse(response);
