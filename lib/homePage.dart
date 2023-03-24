@@ -32,6 +32,9 @@ class _HomePageState extends State<HomePage> {
                   onPressed: statemanager.makePostRequest, child: Text('POST')),
               ElevatedButton(
                   onPressed: statemanager.makePutRequest, child: Text('put')),
+              ElevatedButton(
+                  onPressed: statemanager.makePatchRequest,
+                  child: Text('DELETE')),
             ],
           ),
         ),

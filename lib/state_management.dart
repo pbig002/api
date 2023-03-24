@@ -48,27 +48,47 @@ class HomePageManager {
     _handleResponse(response);
   }
 
-   Future<void> makePutRequest() async {
+  Future<void> makePutRequest() async {
     resultNotifier.value = RequestLoadInProgress();
 
-    var response = await http.put(Uri.parse('http://localhost:8080/category/640088dc9d7d6dbe197f9458'),
+    var response = await http.put(
+        Uri.parse('http://localhost:8080/category/640088dc9d7d6dbe197f9458'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         },
         body: jsonEncode(<String, dynamic>{
-  "name": "ເຄື່ອງໃຊ້ໄຟຟ້າ2",
-  "icon": "electricity2.png",
-  "description": "ທຸກຢ່າງທີ່ກ່ຽວກັບເຄື່ອງໃຊ້ໄຟຟ້າ"
-}));
+          "name": "ເຄື່ອງໃຊ້ໄຟຟ້າ2",
+          "icon": "electricity2.png",
+          "description": "ທຸກຢ່າງທີ່ກ່ຽວກັບເຄື່ອງໃຊ້ໄຟຟ້າ"
+        }));
 
     print('Status code: ${response.statusCode}');
     print('Body: ${response.body}');
     _handleResponse(response);
   }
 
+  Future<void> makePatchRequest() async {
+    resultNotifier.value = RequestLoadInProgress();
 
+    var response = await http.delete(
+        Uri.parse('http://localhost:8080/staff/64007e7e7d66110d330c2938'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode(<String, dynamic>{
+  "name": "patch",
+  "icon": "patch.png",
+  "description": "patchtest"
+}));
+
+    print('Status code: ${response.statusCode}');
+    print('Body: ${response.body}');
+    _handleResponse(response);
+  }
 
   void _handleResponse(var response) {
     if (response.statusCode >= 400) {
@@ -78,6 +98,8 @@ class HomePageManager {
     }
   }
 }
+
+
 
 class RequestState {
   const RequestState();
